@@ -1,19 +1,32 @@
 @import "tailwindcss";
 
 :root {
-  --navy: #0a1628;
-  --navy-mid: #0f2138;
-  --navy-light: #152a45;
-  --slate: #64748b;
-  --slate-light: #94a3b8;
-  --slate-dark: #334155;
-  --slate-muted: #cbd5e1;
-  --teal: #2a9d8f;
-  --teal-light: #3db5a6;
-  --teal-muted: #edf7f5;
+  --grey-950: #1a1a1a;
+  --grey-900: #262626;
+  --grey-800: #333333;
+  --grey-700: #4a4a4a;
+  --grey-600: #6b6b6b;
+  --grey-500: #8a8a8a;
+  --grey-400: #a3a3a3;
+  --grey-300: #c4c4c4;
+  --grey-200: #e5e5e5;
+  --grey-100: #f0f0f0;
+  --grey-50: #f8f8f8;
   --white: #ffffff;
-  --off-white: #f7f9fc;
   --section-pad: clamp(5rem, 10vw, 9rem);
+
+  /* Legacy aliases mapped to grey palette */
+  --navy: var(--grey-950);
+  --navy-mid: var(--grey-900);
+  --navy-light: var(--grey-800);
+  --slate: var(--grey-600);
+  --slate-light: var(--grey-400);
+  --slate-dark: var(--grey-700);
+  --slate-muted: var(--grey-300);
+  --teal: var(--grey-800);
+  --teal-light: var(--grey-500);
+  --teal-muted: var(--grey-100);
+  --off-white: var(--grey-50);
 }
 
 @theme inline {
@@ -28,11 +41,22 @@
   --color-teal-light: var(--teal-light);
   --color-teal-muted: var(--teal-muted);
   --color-off-white: var(--off-white);
+  --color-grey-950: var(--grey-950);
+  --color-grey-900: var(--grey-900);
+  --color-grey-800: var(--grey-800);
+  --color-grey-700: var(--grey-700);
+  --color-grey-600: var(--grey-600);
+  --color-grey-500: var(--grey-500);
+  --color-grey-400: var(--grey-400);
+  --color-grey-300: var(--grey-300);
+  --color-grey-200: var(--grey-200);
+  --color-grey-100: var(--grey-100);
+  --color-grey-50: var(--grey-50);
   --font-sans: var(--font-dm-sans);
   --font-serif: var(--font-instrument-serif);
-  --shadow-card: 0 1px 2px rgb(10 22 40 / 0.04), 0 8px 24px rgb(10 22 40 / 0.06);
-  --shadow-card-hover: 0 2px 4px rgb(10 22 40 / 0.04), 0 16px 40px rgb(42 157 143 / 0.1);
-  --shadow-elevated: 0 24px 64px rgb(10 22 40 / 0.12);
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.03), 0 8px 24px rgb(0 0 0 / 0.05);
+  --shadow-card-hover: 0 2px 4px rgb(0 0 0 / 0.04), 0 16px 40px rgb(0 0 0 / 0.08);
+  --shadow-elevated: 0 24px 64px rgb(0 0 0 / 0.1);
 }
 
 html {
@@ -41,7 +65,7 @@ html {
 
 body {
   background: var(--white);
-  color: var(--navy);
+  color: var(--grey-950);
   font-family: var(--font-dm-sans), system-ui, sans-serif;
   font-feature-settings: "kern" 1, "liga" 1;
   text-rendering: optimizeLegibility;
@@ -49,8 +73,8 @@ body {
 }
 
 ::selection {
-  background: color-mix(in srgb, var(--teal) 22%, transparent);
-  color: var(--navy);
+  background: color-mix(in srgb, var(--grey-400) 35%, transparent);
+  color: var(--grey-950);
 }
 
 .section-pad {
@@ -92,12 +116,12 @@ body {
 .prose-body {
   font-size: 1.0625rem;
   line-height: 1.75;
-  color: var(--slate-dark);
+  color: var(--grey-600);
 }
 
 .card-surface {
   background: var(--white);
-  border: 1px solid color-mix(in srgb, var(--slate-muted) 60%, transparent);
+  border: 1px solid color-mix(in srgb, var(--grey-300) 70%, transparent);
   border-radius: 1rem;
   box-shadow: var(--shadow-card);
   transition:
@@ -107,13 +131,40 @@ body {
 }
 
 .card-surface:hover {
-  border-color: color-mix(in srgb, var(--teal) 28%, transparent);
+  border-color: color-mix(in srgb, var(--grey-500) 40%, transparent);
   box-shadow: var(--shadow-card-hover);
+}
+
+.shadow-card {
+  box-shadow: var(--shadow-card);
+}
+
+.shadow-elevated {
+  box-shadow: var(--shadow-elevated);
 }
 
 .hero-grid {
   background-image:
-    linear-gradient(rgb(255 255 255 / 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgb(255 255 255 / 0.03) 1px, transparent 1px);
+    linear-gradient(rgb(0 0 0 / 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(0 0 0 / 0.04) 1px, transparent 1px);
   background-size: 64px 64px;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  background: var(--grey-900);
+  padding: 0.875rem 2rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--white);
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.12);
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: var(--grey-800);
+  box-shadow: 0 6px 20px rgb(0 0 0 / 0.15);
 }
