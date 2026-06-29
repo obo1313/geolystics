@@ -10,34 +10,44 @@ const navLinks = [
 
 const services = [
   {
-    title: "Global Business Development",
+    title: "Supply Chain Strategy",
     description:
-      "Expanding market reach through cross-border partnerships, international structuring, and entry strategies tailored to each region.",
+      "Design and strengthen supply chain structures that improve performance, resilience, and competitiveness.",
   },
   {
-    title: "Supply Chain Development",
+    title: "Franchising & Licensing",
     description:
-      "Designing resilient, efficient supply networks that connect sourcing, logistics, and distribution for long-term operational advantage.",
+      "Support structured expansion through franchise and licensing models with strategic and operational clarity.",
   },
   {
-    title: "Brand Franchising & Licensing",
+    title: "Business Integration",
     description:
-      "Structuring franchise and licensing models that protect brand equity while enabling scalable, sustainable growth.",
+      "Align processes, teams, and core business functions for stronger execution.",
   },
   {
-    title: "Strategic Guidance",
+    title: "Training & Standards Implementation",
     description:
-      "Translating vision into actionable roadmaps — from competitive positioning to organizational alignment and execution.",
+      "Build internal capability through education, training, and practical standards adoption.",
   },
   {
-    title: "Standards Implementation",
+    title: "Operational Excellence",
     description:
-      "Embedding internationally recognized frameworks and quality systems that strengthen credibility and operational consistency.",
+      "Improve workflows, consistency, and execution through better systems and management discipline.",
   },
   {
-    title: "Education & Training",
+    title: "International Growth Support",
     description:
-      "Delivering practical, hands-on programs that equip teams with the knowledge and skills to sustain performance.",
+      "Help businesses prepare for expansion in global and cross-border markets.",
+  },
+  {
+    title: "Robotics in Logistics",
+    description:
+      "Explore robotics-driven improvements in warehousing, handling, automation, and logistics performance.",
+  },
+  {
+    title: "Mergers & Acquisitions",
+    description:
+      "Support integration strategy and operational alignment during acquisition, merger, or business transition.",
   },
 ];
 
@@ -232,17 +242,17 @@ export default function Home() {
                 Comprehensive integration expertise
               </h2>
               <p className="prose-body mt-5">
-                From global market entry to franchise system design, we deliver
+                From supply chain strategy to mergers and acquisitions, we deliver
                 the strategic and operational support your organization needs to
                 grow with confidence.
               </p>
             </div>
 
-            <div className="mt-20 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-16 grid grid-cols-1 gap-4 sm:mt-20 sm:grid-cols-2 sm:gap-5 lg:grid-cols-4">
               {services.map((service, index) => (
                 <article
                   key={service.title}
-                  className="card-surface group flex flex-col bg-white p-8 lg:p-9"
+                  className="card-surface group flex h-full flex-col bg-white p-6 sm:p-7 lg:p-6 xl:p-7"
                 >
                   <span className="text-[0.6875rem] font-semibold tracking-[0.18em] text-grey-500">
                     {String(index + 1).padStart(2, "0")}
