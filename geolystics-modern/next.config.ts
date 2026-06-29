@@ -1,7 +1,14 @@
 import type { NextConfig } from "next";
 
+const isGithubPages = process.env.GITHUB_PAGES === "true";
+
 const nextConfig: NextConfig = {
-  /* config options here */
+  output: "export",
+  basePath: isGithubPages ? "/geolystics" : "",
+  assetPrefix: isGithubPages ? "/geolystics/" : undefined,
+  images: {
+    unoptimized: true,
+  },
 };
 
 export default nextConfig;
