@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 const navLinks = [
   { label: "About", href: "#about" },
   { label: "Services", href: "#services" },
@@ -47,32 +49,48 @@ const highlights = [
 ];
 
 const affiliations = [
-  "International Franchise Association",
-  "ISO Standards Network",
-  "European Supply Chain Council",
-  "Global Business Alliance",
-  "Hellenic Enterprise Federation",
-  "World Licensing Industry Council",
+  { name: "International Franchise Association", abbr: "IFA" },
+  { name: "ISO Standards Network", abbr: "ISO" },
+  { name: "European Supply Chain Council", abbr: "ESCC" },
+  { name: "Global Business Alliance", abbr: "GBA" },
+  { name: "Hellenic Enterprise Federation", abbr: "HEF" },
+  { name: "World Licensing Industry Council", abbr: "WLIC" },
 ];
+
+function SectionLabel({
+  children,
+  tone = "light",
+}: {
+  children: ReactNode;
+  tone?: "light" | "dark";
+}) {
+  return (
+    <p
+      className={`section-label ${tone === "light" ? "text-teal-light" : "text-teal"}`}
+    >
+      {children}
+    </p>
+  );
+}
 
 export default function Home() {
   return (
     <div className="flex flex-col">
       {/* Navigation */}
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-navy/90 backdrop-blur-md">
-        <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4 lg:px-8">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.06] bg-navy/80 backdrop-blur-xl">
+        <nav className="mx-auto flex h-[4.5rem] max-w-6xl items-center justify-between px-6 lg:px-10">
           <a
             href="#"
-            className="font-serif text-2xl tracking-tight text-white"
+            className="heading-display text-[1.35rem] text-white"
           >
             Geolystics
           </a>
-          <ul className="hidden items-center gap-8 md:flex">
+          <ul className="hidden items-center gap-10 lg:flex">
             {navLinks.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="text-sm font-medium tracking-wide text-slate-light transition-colors hover:text-teal-light"
+                  className="text-[0.8125rem] font-medium tracking-[0.04em] text-slate-light transition-colors duration-200 hover:text-white"
                 >
                   {link.label}
                 </a>
@@ -81,7 +99,7 @@ export default function Home() {
           </ul>
           <a
             href="#contact"
-            className="rounded-full bg-teal px-5 py-2 text-sm font-semibold text-white transition-colors hover:bg-teal-light"
+            className="rounded-full bg-teal px-5 py-2.5 text-[0.8125rem] font-semibold tracking-wide text-white shadow-[0_4px_14px_rgb(42_157_143/0.35)] transition-all duration-200 hover:bg-teal-light hover:shadow-[0_6px_20px_rgb(42_157_143/0.4)]"
           >
             Get in Touch
           </a>
@@ -90,203 +108,119 @@ export default function Home() {
 
       <main>
         {/* Hero */}
-        <section className="relative flex min-h-screen items-center bg-navy px-6 pt-24 lg:px-8">
+        <section className="hero-grid relative flex min-h-[100svh] items-center bg-navy">
           <div className="pointer-events-none absolute inset-0 overflow-hidden">
-            <div className="absolute -right-32 -top-32 h-[500px] w-[500px] rounded-full bg-teal/10 blur-3xl" />
-            <div className="absolute -bottom-48 -left-48 h-[600px] w-[600px] rounded-full bg-teal/5 blur-3xl" />
+            <div className="absolute right-0 top-0 h-[min(70vw,520px)] w-[min(70vw,520px)] -translate-y-1/4 translate-x-1/4 rounded-full bg-teal/[0.07] blur-[100px]" />
+            <div className="absolute bottom-0 left-0 h-[min(60vw,480px)] w-[min(60vw,480px)] -translate-x-1/3 translate-y-1/3 rounded-full bg-teal/[0.04] blur-[120px]" />
           </div>
-          <div className="relative mx-auto grid max-w-6xl gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
-            <div>
-              <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-teal-light">
-                Business Integration · Est. 2014
-              </p>
-              <h1 className="font-serif text-5xl leading-[1.1] tracking-tight text-white sm:text-6xl lg:text-7xl">
-                Integrating strategy, standards &amp; growth
-              </h1>
-              <p className="mt-6 max-w-lg text-lg leading-relaxed text-slate-light">
-                Geolystics helps organizations strengthen competitiveness and
-                achieve sustainable growth through strategic guidance, global
-                business development, and practical expertise.
-              </p>
-              <div className="mt-10 flex flex-wrap gap-4">
-                <a
-                  href="#services"
-                  className="rounded-full bg-teal px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-teal-light"
-                >
-                  Explore Services
-                </a>
-                <a
-                  href="#about"
-                  className="rounded-full border border-white/20 px-7 py-3 text-sm font-semibold text-white transition-colors hover:border-teal-light hover:text-teal-light"
-                >
-                  About Geolystics
-                </a>
-              </div>
-            </div>
-            <div className="hidden lg:block">
-              <div className="rounded-2xl border border-white/10 bg-navy-light/60 p-10 backdrop-blur-sm">
-                <div className="space-y-8">
-                  {[
-                    { value: "2014", label: "Founded in Greece" },
-                    { value: "Global", label: "Business reach" },
-                    { value: "360°", label: "Integration approach" },
-                  ].map((stat) => (
-                    <div
-                      key={stat.label}
-                      className="border-b border-white/10 pb-8 last:border-0 last:pb-0"
-                    >
-                      <p className="font-serif text-4xl text-teal-light">
-                        {stat.value}
-                      </p>
-                      <p className="mt-1 text-sm text-slate-light">
-                        {stat.label}
-                      </p>
-                    </div>
-                  ))}
+
+          <div className="relative mx-auto w-full max-w-6xl px-6 pb-20 pt-36 lg:px-10 lg:pb-28 lg:pt-40">
+            <div className="grid items-end gap-16 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
+              <div className="max-w-2xl">
+                <SectionLabel tone="light">Business Integration · Est. 2014</SectionLabel>
+                <h1 className="heading-display mt-8 text-[clamp(2.75rem,6vw,4.5rem)] text-white">
+                  Integrating strategy, standards &amp; growth
+                </h1>
+                <p className="mt-8 max-w-lg text-[1.0625rem] leading-[1.8] text-slate-light">
+                  Geolystics helps organizations strengthen competitiveness and
+                  achieve sustainable growth through strategic guidance, global
+                  business development, and practical expertise.
+                </p>
+                <div className="mt-12 flex flex-wrap items-center gap-4">
+                  <a
+                    href="#services"
+                    className="inline-flex items-center rounded-full bg-teal px-8 py-3.5 text-[0.8125rem] font-semibold tracking-wide text-white shadow-[0_4px_14px_rgb(42_157_143/0.35)] transition-all duration-200 hover:bg-teal-light"
+                  >
+                    Explore Services
+                  </a>
+                  <a
+                    href="#about"
+                    className="inline-flex items-center rounded-full border border-white/15 px-8 py-3.5 text-[0.8125rem] font-semibold tracking-wide text-white/90 transition-all duration-200 hover:border-white/30 hover:text-white"
+                  >
+                    About Geolystics
+                  </a>
                 </div>
               </div>
+
+              <div className="hidden lg:block">
+                <div className="rounded-2xl border border-white/[0.08] bg-white/[0.03] p-10 backdrop-blur-sm">
+                  <div className="divide-y divide-white/[0.08]">
+                    {[
+                      { value: "2014", label: "Founded in Greece" },
+                      { value: "Global", label: "Business reach" },
+                      { value: "360°", label: "Integration approach" },
+                    ].map((stat) => (
+                      <div key={stat.label} className="py-7 first:pt-0 last:pb-0">
+                        <p className="heading-display text-[2.25rem] text-teal-light">
+                          {stat.value}
+                        </p>
+                        <p className="mt-1.5 text-[0.8125rem] tracking-wide text-slate-light">
+                          {stat.label}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-20 hidden items-center gap-3 text-slate-light lg:flex">
+              <span className="h-px w-12 bg-white/20" />
+              <span className="text-[0.6875rem] font-medium uppercase tracking-[0.2em]">
+                Scroll to explore
+              </span>
             </div>
           </div>
         </section>
 
         {/* About */}
-        <section id="about" className="bg-off-white px-6 py-24 lg:px-8 lg:py-32">
-          <div className="mx-auto max-w-6xl">
-            <div className="max-w-2xl">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-teal">
-                About
-              </p>
-              <h2 className="mt-3 font-serif text-4xl tracking-tight text-navy sm:text-5xl">
-                Bridging ambition with execution
-              </h2>
-            </div>
-            <div className="mt-12 grid gap-12 lg:grid-cols-2 lg:gap-20">
-              <p className="text-lg leading-relaxed text-slate-dark">
-                Geolystics is a business integration company founded in Greece
-                in 2014, focused on global business, supply chain development,
-                and brand franchising and licensing. The company helps
-                organizations improve competitiveness and sustainable growth
-                through strategic guidance, standards implementation, education,
-                and practical training.
-              </p>
-              <div className="space-y-6">
-                {[
-                  "Strategic guidance aligned with market realities",
-                  "Standards implementation for operational excellence",
-                  "Education and training that drives lasting change",
-                  "End-to-end support from concept to execution",
-                ].map((item) => (
-                  <div key={item} className="flex items-start gap-4">
-                    <span className="mt-1 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-teal-muted">
-                      <svg
-                        className="h-3.5 w-3.5 text-teal"
-                        fill="none"
-                        viewBox="0 0 24 24"
-                        strokeWidth={2.5}
-                        stroke="currentColor"
-                      >
-                        <path
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          d="M4.5 12.75l6 6 9-13.5"
-                        />
-                      </svg>
-                    </span>
-                    <p className="text-slate-dark">{item}</p>
-                  </div>
-                ))}
+        <section id="about" className="section-pad bg-off-white">
+          <div className="mx-auto max-w-6xl px-6 lg:px-10">
+            <div className="grid gap-16 lg:grid-cols-12 lg:gap-20">
+              <div className="lg:col-span-5">
+                <SectionLabel>About</SectionLabel>
+                <h2 className="heading-section mt-6 text-[clamp(2rem,4vw,3rem)] text-navy">
+                  Bridging ambition with execution
+                </h2>
               </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Services */}
-        <section id="services" className="bg-white px-6 py-24 lg:px-8 lg:py-32">
-          <div className="mx-auto max-w-6xl">
-            <div className="text-center">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-teal">
-                Services
-              </p>
-              <h2 className="mt-3 font-serif text-4xl tracking-tight text-navy sm:text-5xl">
-                Comprehensive integration expertise
-              </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-lg text-slate">
-                From global market entry to franchise system design, we deliver
-                the strategic and operational support your organization needs to
-                grow with confidence.
-              </p>
-            </div>
-            <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {services.map((service) => (
-                <article
-                  key={service.title}
-                  className="group rounded-2xl border border-slate-light/30 bg-off-white p-8 transition-all hover:border-teal/30 hover:shadow-lg hover:shadow-teal/5"
-                >
-                  <div className="mb-4 h-1 w-10 rounded-full bg-teal transition-all group-hover:w-16" />
-                  <h3 className="text-lg font-semibold text-navy">
-                    {service.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-slate">
-                    {service.description}
-                  </p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Leadership */}
-        <section
-          id="leadership"
-          className="bg-navy px-6 py-24 lg:px-8 lg:py-32"
-        >
-          <div className="mx-auto max-w-6xl">
-            <div className="max-w-2xl">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-teal-light">
-                Leadership
-              </p>
-              <h2 className="mt-3 font-serif text-4xl tracking-tight text-white sm:text-5xl">
-                Guided by experience
-              </h2>
-            </div>
-            <div className="mt-16 grid gap-12 lg:grid-cols-5 lg:gap-16">
-              <div className="flex flex-col items-center lg:col-span-2">
-                <div className="flex h-56 w-56 items-center justify-center rounded-2xl border border-white/10 bg-navy-light">
-                  <span className="font-serif text-6xl text-teal-light">
-                    SO
-                  </span>
-                </div>
-                <h3 className="mt-6 text-center text-2xl font-semibold text-white">
-                  Spyros Olympios
-                </h3>
-                <p className="mt-1 text-center text-sm font-medium uppercase tracking-wider text-teal-light">
-                  Founder &amp; Managing Director
+              <div className="lg:col-span-7">
+                <p className="prose-body max-w-2xl">
+                  Geolystics is a business integration company founded in Greece
+                  in 2014, focused on global business, supply chain development,
+                  and brand franchising and licensing. The company helps
+                  organizations improve competitiveness and sustainable growth
+                  through strategic guidance, standards implementation, education,
+                  and practical training.
                 </p>
-              </div>
-              <div className="lg:col-span-3">
-                <p className="text-lg leading-relaxed text-slate-light">
-                  Spyros Olympios is the founder and managing director of
-                  Geolystics, bringing over a decade of experience in business
-                  integration, international market development, and
-                  organizational transformation. Since establishing the company
-                  in Greece in 2014, he has guided enterprises across sectors in
-                  building competitive advantage through strategic planning,
-                  supply chain excellence, and franchise system architecture.
-                </p>
-                <p className="mt-4 text-lg leading-relaxed text-slate-light">
-                  A practitioner at heart, Spyros combines rigorous standards
-                  implementation with hands-on education and training — ensuring
-                  that every engagement delivers measurable, sustainable results
-                  for clients pursuing global growth.
-                </p>
-                <h4 className="mt-8 text-sm font-semibold uppercase tracking-[0.15em] text-teal-light">
-                  Selected Highlights
-                </h4>
-                <ul className="mt-4 space-y-3">
-                  {highlights.map((item) => (
-                    <li key={item} className="flex items-start gap-3">
-                      <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-teal-light" />
-                      <span className="text-slate-light">{item}</span>
+                <ul className="mt-12 grid gap-5 sm:grid-cols-2">
+                  {[
+                    "Strategic guidance aligned with market realities",
+                    "Standards implementation for operational excellence",
+                    "Education and training that drives lasting change",
+                    "End-to-end support from concept to execution",
+                  ].map((item) => (
+                    <li
+                      key={item}
+                      className="flex items-start gap-3.5 rounded-xl border border-slate-muted/40 bg-white px-5 py-4"
+                    >
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-teal-muted">
+                        <svg
+                          className="h-2.5 w-2.5 text-teal"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          strokeWidth={3}
+                          stroke="currentColor"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            d="M4.5 12.75l6 6 9-13.5"
+                          />
+                        </svg>
+                      </span>
+                      <span className="text-[0.9375rem] leading-snug text-slate-dark">
+                        {item}
+                      </span>
                     </li>
                   ))}
                 </ul>
@@ -295,32 +229,137 @@ export default function Home() {
           </div>
         </section>
 
-        {/* Affiliations */}
-        <section
-          id="affiliations"
-          className="bg-off-white px-6 py-24 lg:px-8 lg:py-32"
-        >
-          <div className="mx-auto max-w-6xl">
-            <div className="text-center">
-              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-teal">
-                Affiliations
+        {/* Services */}
+        <section id="services" className="section-pad bg-white">
+          <div className="mx-auto max-w-6xl px-6 lg:px-10">
+            <div className="mx-auto max-w-2xl text-center">
+              <SectionLabel>Services</SectionLabel>
+              <h2 className="heading-section mt-6 text-[clamp(2rem,4vw,3rem)] text-navy">
+                Comprehensive integration expertise
+              </h2>
+              <p className="prose-body mt-5">
+                From global market entry to franchise system design, we deliver
+                the strategic and operational support your organization needs to
+                grow with confidence.
               </p>
-              <h2 className="mt-3 font-serif text-4xl tracking-tight text-navy sm:text-5xl">
+            </div>
+
+            <div className="mt-20 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              {services.map((service, index) => (
+                <article
+                  key={service.title}
+                  className="card-surface group flex flex-col p-8 lg:p-9"
+                >
+                  <span className="text-[0.6875rem] font-semibold tracking-[0.18em] text-teal">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-4 text-[1.0625rem] font-semibold leading-snug tracking-tight text-navy">
+                    {service.title}
+                  </h3>
+                  <p className="mt-3 flex-1 text-[0.9375rem] leading-[1.7] text-slate">
+                    {service.description}
+                  </p>
+                  <div className="mt-6 h-px w-8 bg-teal/30 transition-all duration-300 group-hover:w-12 group-hover:bg-teal/60" />
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Leadership */}
+        <section id="leadership" className="section-pad bg-navy">
+          <div className="mx-auto max-w-6xl px-6 lg:px-10">
+            <div className="max-w-xl">
+              <SectionLabel tone="light">Leadership</SectionLabel>
+              <h2 className="heading-section mt-6 text-[clamp(2rem,4vw,3rem)] text-white">
+                Guided by experience
+              </h2>
+            </div>
+
+            <div className="mt-20 grid gap-16 lg:grid-cols-12 lg:gap-20">
+              <div className="flex flex-col items-center lg:col-span-4 lg:items-start">
+                <div className="relative">
+                  <div className="flex h-64 w-64 items-center justify-center rounded-2xl border border-white/[0.08] bg-navy-mid shadow-elevated">
+                    <span className="heading-display text-[4.5rem] text-teal-light/80">
+                      SO
+                    </span>
+                  </div>
+                  <div className="absolute -bottom-3 -right-3 h-full w-full rounded-2xl border border-teal/20" />
+                </div>
+                <div className="mt-10 text-center lg:text-left">
+                  <h3 className="text-[1.375rem] font-semibold tracking-tight text-white">
+                    Spyros Olympios
+                  </h3>
+                  <p className="mt-2 text-[0.75rem] font-semibold uppercase tracking-[0.16em] text-teal-light">
+                    Founder &amp; Managing Director
+                  </p>
+                </div>
+              </div>
+
+              <div className="lg:col-span-8">
+                <div className="space-y-6 border-l border-white/[0.08] pl-8 lg:pl-12">
+                  <p className="text-[1.0625rem] leading-[1.8] text-slate-light">
+                    Spyros Olympios is the founder and managing director of
+                    Geolystics, bringing over a decade of experience in business
+                    integration, international market development, and
+                    organizational transformation. Since establishing the company
+                    in Greece in 2014, he has guided enterprises across sectors in
+                    building competitive advantage through strategic planning,
+                    supply chain excellence, and franchise system architecture.
+                  </p>
+                  <p className="text-[1.0625rem] leading-[1.8] text-slate-light">
+                    A practitioner at heart, Spyros combines rigorous standards
+                    implementation with hands-on education and training — ensuring
+                    that every engagement delivers measurable, sustainable results
+                    for clients pursuing global growth.
+                  </p>
+                </div>
+
+                <div className="mt-12 rounded-2xl border border-white/[0.08] bg-navy-mid/50 p-8 lg:p-10">
+                  <h4 className="text-[0.6875rem] font-semibold uppercase tracking-[0.2em] text-teal-light">
+                    Selected Highlights
+                  </h4>
+                  <ul className="mt-6 space-y-4">
+                    {highlights.map((item) => (
+                      <li key={item} className="flex items-start gap-4">
+                        <span className="mt-2.5 h-1 w-6 shrink-0 bg-teal/50" />
+                        <span className="text-[0.9375rem] leading-[1.7] text-slate-light">
+                          {item}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Affiliations */}
+        <section id="affiliations" className="section-pad bg-off-white">
+          <div className="mx-auto max-w-6xl px-6 lg:px-10">
+            <div className="mx-auto max-w-2xl text-center">
+              <SectionLabel>Affiliations</SectionLabel>
+              <h2 className="heading-section mt-6 text-[clamp(2rem,4vw,3rem)] text-navy">
                 Connected to global standards
               </h2>
-              <p className="mx-auto mt-4 max-w-2xl text-lg text-slate">
+              <p className="prose-body mt-5">
                 Geolystics maintains active relationships with leading industry
                 bodies and professional networks worldwide.
               </p>
             </div>
-            <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-3">
-              {affiliations.map((name) => (
+
+            <div className="mt-20 grid grid-cols-2 gap-4 lg:grid-cols-3 lg:gap-5">
+              {affiliations.map((org) => (
                 <div
-                  key={name}
-                  className="flex items-center justify-center rounded-xl border border-slate-light/30 bg-white px-6 py-8 text-center transition-colors hover:border-teal/30"
+                  key={org.name}
+                  className="card-surface flex flex-col items-center px-6 py-9 text-center"
                 >
-                  <p className="text-sm font-medium leading-snug text-slate-dark">
-                    {name}
+                  <span className="flex h-11 w-11 items-center justify-center rounded-full border border-teal/15 bg-teal-muted text-[0.6875rem] font-bold tracking-wider text-teal">
+                    {org.abbr}
+                  </span>
+                  <p className="mt-5 text-[0.875rem] font-medium leading-snug text-slate-dark">
+                    {org.name}
                   </p>
                 </div>
               ))}
@@ -329,55 +368,60 @@ export default function Home() {
         </section>
 
         {/* Contact */}
-        <section id="contact" className="bg-white px-6 py-24 lg:px-8 lg:py-32">
-          <div className="mx-auto max-w-6xl">
-            <div className="grid gap-16 lg:grid-cols-2">
+        <section id="contact" className="section-pad bg-white">
+          <div className="mx-auto max-w-6xl px-6 lg:px-10">
+            <div className="grid gap-16 lg:grid-cols-2 lg:gap-24">
               <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.2em] text-teal">
-                  Contact
-                </p>
-                <h2 className="mt-3 font-serif text-4xl tracking-tight text-navy sm:text-5xl">
+                <SectionLabel>Contact</SectionLabel>
+                <h2 className="heading-section mt-6 text-[clamp(2rem,4vw,3rem)] text-navy">
                   Let&apos;s build something lasting
                 </h2>
-                <p className="mt-4 text-lg leading-relaxed text-slate">
+                <p className="prose-body mt-6 max-w-md">
                   Whether you are exploring a new market, structuring a franchise
                   system, or strengthening your supply chain — we are ready to
                   start the conversation.
                 </p>
-                <dl className="mt-10 space-y-6">
-                  <div>
-                    <dt className="text-xs font-semibold uppercase tracking-wider text-slate">
-                      Location
-                    </dt>
-                    <dd className="mt-1 text-navy">Athens, Greece</dd>
-                  </div>
-                  <div>
-                    <dt className="text-xs font-semibold uppercase tracking-wider text-slate">
-                      Email
-                    </dt>
-                    <dd className="mt-1">
-                      <a
-                        href="mailto:info@geolystics.com"
-                        className="text-navy underline decoration-teal/40 underline-offset-4 transition-colors hover:text-teal hover:decoration-teal"
-                      >
-                        info@geolystics.com
-                      </a>
-                    </dd>
-                  </div>
-                  <div>
-                    <dt className="text-xs font-semibold uppercase tracking-wider text-slate">
-                      Founded
-                    </dt>
-                    <dd className="mt-1 text-navy">2014</dd>
-                  </div>
+
+                <dl className="mt-14 space-y-8">
+                  {[
+                    { label: "Location", value: "Athens, Greece" },
+                    {
+                      label: "Email",
+                      value: "info@geolystics.com",
+                      href: "mailto:info@geolystics.com",
+                    },
+                    { label: "Founded", value: "2014" },
+                  ].map((item) => (
+                    <div key={item.label}>
+                      <dt className="text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-slate">
+                        {item.label}
+                      </dt>
+                      <dd className="mt-2 text-[1rem] text-navy">
+                        {item.href ? (
+                          <a
+                            href={item.href}
+                            className="underline decoration-teal/30 underline-offset-[5px] transition-colors hover:text-teal hover:decoration-teal"
+                          >
+                            {item.value}
+                          </a>
+                        ) : (
+                          item.value
+                        )}
+                      </dd>
+                    </div>
+                  ))}
                 </dl>
               </div>
-              <form className="rounded-2xl border border-slate-light/30 bg-off-white p-8 lg:p-10">
-                <div className="space-y-5">
+
+              <form className="card-surface p-8 lg:p-10">
+                <p className="text-[0.6875rem] font-semibold uppercase tracking-[0.18em] text-slate">
+                  Send an inquiry
+                </p>
+                <div className="mt-8 space-y-6">
                   <div>
                     <label
                       htmlFor="name"
-                      className="block text-sm font-medium text-navy"
+                      className="block text-[0.8125rem] font-medium text-navy"
                     >
                       Name
                     </label>
@@ -385,14 +429,14 @@ export default function Home() {
                       id="name"
                       name="name"
                       type="text"
-                      className="mt-1.5 w-full rounded-lg border border-slate-light/40 bg-white px-4 py-2.5 text-sm text-navy outline-none transition-colors placeholder:text-slate-light focus:border-teal focus:ring-1 focus:ring-teal"
+                      className="mt-2 w-full rounded-lg border border-slate-muted/50 bg-off-white px-4 py-3 text-[0.9375rem] text-navy outline-none transition-all placeholder:text-slate-light focus:border-teal focus:bg-white focus:ring-2 focus:ring-teal/10"
                       placeholder="Your name"
                     />
                   </div>
                   <div>
                     <label
                       htmlFor="email"
-                      className="block text-sm font-medium text-navy"
+                      className="block text-[0.8125rem] font-medium text-navy"
                     >
                       Email
                     </label>
@@ -400,28 +444,28 @@ export default function Home() {
                       id="email"
                       name="email"
                       type="email"
-                      className="mt-1.5 w-full rounded-lg border border-slate-light/40 bg-white px-4 py-2.5 text-sm text-navy outline-none transition-colors placeholder:text-slate-light focus:border-teal focus:ring-1 focus:ring-teal"
+                      className="mt-2 w-full rounded-lg border border-slate-muted/50 bg-off-white px-4 py-3 text-[0.9375rem] text-navy outline-none transition-all placeholder:text-slate-light focus:border-teal focus:bg-white focus:ring-2 focus:ring-teal/10"
                       placeholder="you@company.com"
                     />
                   </div>
                   <div>
                     <label
                       htmlFor="message"
-                      className="block text-sm font-medium text-navy"
+                      className="block text-[0.8125rem] font-medium text-navy"
                     >
                       Message
                     </label>
                     <textarea
                       id="message"
                       name="message"
-                      rows={4}
-                      className="mt-1.5 w-full resize-none rounded-lg border border-slate-light/40 bg-white px-4 py-2.5 text-sm text-navy outline-none transition-colors placeholder:text-slate-light focus:border-teal focus:ring-1 focus:ring-teal"
+                      rows={5}
+                      className="mt-2 w-full resize-none rounded-lg border border-slate-muted/50 bg-off-white px-4 py-3 text-[0.9375rem] text-navy outline-none transition-all placeholder:text-slate-light focus:border-teal focus:bg-white focus:ring-2 focus:ring-teal/10"
                       placeholder="How can we help?"
                     />
                   </div>
                   <button
                     type="submit"
-                    className="w-full rounded-full bg-teal px-7 py-3 text-sm font-semibold text-white transition-colors hover:bg-teal-light"
+                    className="w-full rounded-full bg-teal px-8 py-3.5 text-[0.8125rem] font-semibold tracking-wide text-white shadow-[0_4px_14px_rgb(42_157_143/0.3)] transition-all duration-200 hover:bg-teal-light"
                   >
                     Send Message
                   </button>
@@ -433,29 +477,38 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 bg-navy px-6 py-12 lg:px-8">
-        <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-6 sm:flex-row">
-          <div>
-            <p className="font-serif text-xl text-white">Geolystics</p>
-            <p className="mt-1 text-sm text-slate-light">
-              Business integration since 2014
+      <footer className="border-t border-white/[0.06] bg-navy">
+        <div className="mx-auto max-w-6xl px-6 py-14 lg:px-10">
+          <div className="flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+            <div>
+              <p className="heading-display text-[1.25rem] text-white">
+                Geolystics
+              </p>
+              <p className="mt-2 text-[0.875rem] text-slate-light">
+                Business integration since 2014
+              </p>
+            </div>
+            <ul className="flex flex-wrap gap-x-8 gap-y-3">
+              {navLinks.map((link) => (
+                <li key={link.href}>
+                  <a
+                    href={link.href}
+                    className="text-[0.8125rem] text-slate-light transition-colors duration-200 hover:text-white"
+                  >
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="mt-12 flex flex-col gap-3 border-t border-white/[0.06] pt-8 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-[0.8125rem] text-slate-light">
+              &copy; {new Date().getFullYear()} Geolystics. All rights reserved.
+            </p>
+            <p className="text-[0.75rem] text-slate-light/70">
+              Athens, Greece
             </p>
           </div>
-          <ul className="flex flex-wrap justify-center gap-6">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <a
-                  href={link.href}
-                  className="text-sm text-slate-light transition-colors hover:text-teal-light"
-                >
-                  {link.label}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <p className="text-sm text-slate-light">
-            &copy; {new Date().getFullYear()} Geolystics. All rights reserved.
-          </p>
         </div>
       </footer>
     </div>
